@@ -1,5 +1,7 @@
 # Compute Clicker
 
+https://compute-clicker.onrender.com/
+
 An incremental/clicker game in the spirit of Cookie Clicker, built to teach
 intro CS students real computing vocabulary — bytes through exabytes, RAM vs
 storage vs VRAM, CPUs vs GPUs, racks, data centers, megawatts — and the power
