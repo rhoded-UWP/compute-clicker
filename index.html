@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMPUTE-CLICKER // OPERATOR TERMINAL</title>
+<meta name="description" content="An educational incremental game: type code, buy hardware, hit bottlenecks, learn how computers actually scale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ BOOT SEQUENCE ============ -->
+<div id="boot">
+  <div id="boot-lines"></div>
+  <div id="boot-skip">[ CLICK TO SKIP ]</div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="app">
+
+  <header>
+    <div id="brand" class="panel">
+      <h1>COMPUTE‑CLICKER</h1>
+      <small>OPERATOR TERMINAL — CS‑101 EDITION</small>
+    </div>
+    <div id="readout" class="panel">
+      <div class="meter">
+        <span class="k">FUNDS</span>
+        <span class="v" id="m-money">$0</span>
+      </div>
+      <div class="meter">
+        <span class="k">NET INCOME</span>
+        <span class="v" id="m-income">$0 <span class="unit">/s</span></span>
+      </div>
+      <div class="meter">
+        <span class="k">CODE OUTPUT</span>
+        <span class="v" id="m-code">0 <span class="unit">LOC/s</span></span>
+      </div>
+      <div class="meter">
+        <span class="k">SCALE</span>
+        <span class="v scale" id="m-scale">KEYBOARD BASEMENT</span>
+      </div>
+    </div>
+    <div id="led-strip" class="panel">
+      <div class="led on"><i></i>PWR</div>
+      <div class="led on amber" id="led-net"><i></i>NET</div>
+      <div class="led" id="led-tmp"><i></i>TMP</div>
+    </div>
+  </header>
+
+  <section id="core-panel" class="panel">
+    <span class="panel-label">DEV STATION</span>
+    <div id="code-stream" aria-hidden="true">&gt; _</div>
+    <div id="die" role="button" tabindex="0" aria-label="Press the dev key: write code manually" title="Write code">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="ring spin"  cx="100" cy="100" r="96" stroke-dasharray="4 7"/>
+        <circle class="ring spin2" cx="100" cy="100" r="86" stroke-dasharray="1 5"/>
+        <rect id="die-pulse" x="38" y="38" width="124" height="124" rx="16"/>
+        <g id="keycap">
+          <rect id="key-base" x="38" y="46" width="124" height="118" rx="16"/>
+          <rect id="key-top"  x="48" y="38" width="104" height="104" rx="10"/>
+          <text id="die-label" x="100" y="86">{ }</text>
+          <text id="die-sub"  x="100" y="112">DEV KEY</text>
+          <text id="die-sub2" x="100" y="126">PRESS TO CODE</text>
+        </g>
+      </svg>
+    </div>
+    <div id="click-hint">&gt;&gt; PRESS THE KEY. WRITE CODE. &lt;&lt;</div>
+    <div id="click-val">+1 LOC → $1.00 / press</div>
+  </section>
+
+  <section id="sys-panel" class="panel">
+    <span class="panel-label">MISSION CONTROL</span>
+    <div id="sys-scroll">
+
+      <div class="sys-head">ACTIVE PROJECT</div>
+      <div id="project-list"></div>
+
+      <div class="sys-head">RESOURCES VS. REQUIREMENTS</div>
+      <div id="res-bars"></div>
+
+      <div class="sys-head">FACILITY</div>
+      <div id="facility-stats"></div>
+
+      <div id="event-banner" hidden></div>
+    </div>
+  </section>
+
+  <section id="log-panel" class="panel">
+    <span class="panel-label">SYSTEM LOG</span>
+    <div id="log" role="log" aria-label="System log"></div>
+  </section>
+
+  <aside id="shop-panel" class="panel">
+    <span class="panel-label">PROCUREMENT</span>
+    <div id="shop-tabs">
+      <button class="active" data-tab="hw" type="button">HARDWARE</button>
+      <button data-tab="up" type="button">UPGRADES</button>
+      <button data-tab="rs" type="button">RESEARCH</button>
+    </div>
+    <div id="shop-list"></div>
+    <div id="shop-footer">
+      <button id="save-btn" type="button" title="Force save">⟪ SAVE ⟫</button>
+      <button id="units-btn" type="button" title="Toggle decimal (KB=1000B) vs binary (KiB=1024B) units">UNITS: KB (×1000)</button>
+      <span id="save-state" aria-live="polite">AUTOSAVE ON</span>
+      <button id="wipe-btn" type="button" title="Wipe save">⟪ WIPE ⟫</button>
+    </div>
+  </aside>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
