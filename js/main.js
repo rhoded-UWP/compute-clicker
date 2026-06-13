@@ -1,6 +1,6 @@
 'use strict';
 /* ============================================================
-   COMPUTE-CLICKER — main loop & wiring
+   SCALE OR DIE AI — main loop & wiring
    ============================================================ */
 
 (function () {
@@ -135,6 +135,7 @@
   function finishBoot() {
     if (bootDone) return;
     bootDone = true;
+    UI.applyTheme(); // saved game may resume on a themed project
     bootEl.classList.add('done');
     document.getElementById('app').classList.add('on');
     UI.logSys('TERMINAL ONLINE. WELCOME, OPERATOR.');

@@ -1,6 +1,6 @@
 'use strict';
 /* ============================================================
-   COMPUTE-CLICKER — engine
+   SCALE OR DIE AI — engine
    Pure game state + math. No DOM in this file (ui.js renders).
    Core formula, from economy.md:
      money/sec = code/sec × code_value × project_value

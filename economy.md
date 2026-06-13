@@ -1,8 +1,8 @@
-# Compute Clicker Economy Design
+# Scale or Die AI — Economy Design
 
 ## Overview
 
-**Compute Clicker** is an incremental/clicker game inspired by Cookie Clicker, but focused on teaching introductory computer science vocabulary and computing scale. The player begins by manually clicking a keyboard to generate code. Code earns money. Money buys better hardware, faster memory, larger storage, GPUs, servers, racks, and eventually full-scale AI data centers.
+**Scale or Die AI** is an incremental/clicker game inspired by Cookie Clicker, but focused on teaching introductory computer science vocabulary and computing scale. The player begins by manually clicking a keyboard to generate code. Code earns money. Money buys better hardware, faster memory, larger storage, GPUs, servers, racks, and eventually full-scale AI data centers.
 
 The educational goal is to indirectly teach concepts such as:
 
@@ -434,7 +434,7 @@ These directly generate code, money, or compute.
 | Keyboard | $10 | Code per click |
 | Script Bot | $50 | Auto code/sec |
 | CPU Core | $200 | Compute/sec |
-| RAM Stick | $250 | Unlocks larger jobs |
+| RAM Stick | $125 | Unlocks larger jobs |
 | SSD | $500 | Storage capacity |
 | GPU | $5,000 | AI compute |
 | Server | $50,000 | Large compute/sec |

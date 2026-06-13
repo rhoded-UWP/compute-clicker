@@ -1,6 +1,6 @@
 'use strict';
 /* ============================================================
-   COMPUTE-CLICKER — UI rendering
+   SCALE OR DIE AI — UI rendering
    Reads G.state / G.stats, writes DOM. Rebuilds list DOM only
    when the visible set changes (signature check) so hover,
    press, and focus state survive the refresh tick.
@@ -24,6 +24,24 @@ UI.init = function () {
     saveState: $('save-state'), unitsBtn: $('units-btn'),
     ledTmp: $('led-tmp'),
   };
+};
+
+/* ------------------- per-project themes ------------------- */
+/* The active project may carry theme:'name' (data.js); we set
+   <body data-theme> and css/themes.css does the rest. Swap is
+   a slow cross-fade via #app opacity — never a hard flash. */
+UI.applyTheme = function () {
+  const proj = DATA.projects.find(p => p.id === G.state.activeProject);
+  const theme = (proj && proj.theme) || '';
+  if ((document.body.dataset.theme || '') === theme) return;
+  const app = $('app');
+  const set = () => {
+    if (theme) document.body.dataset.theme = theme;
+    else delete document.body.dataset.theme;
+  };
+  if (!app.classList.contains('on')) { set(); return; } // pre-boot: no fade needed
+  app.classList.add('theme-swap');
+  setTimeout(() => { set(); app.classList.remove('theme-swap'); }, 420);
 };
 
 /* ------------------- log ------------------- */
@@ -79,6 +97,7 @@ UI.renderProjects = function () {
           if (G.state.activeProject !== p.id) {
             G.state.activeProject = p.id;
             UI.projSig = '';
+            UI.applyTheme();
             UI.logSys(`PROJECT SWITCHED: <b style="color:var(--phos-bright)">${p.name}</b> — "${p.flavor}"`);
           }
         });
@@ -289,6 +308,7 @@ UI.renderResearchTab = function (list) {
     if (!confirm(`Publish a breakthrough paper for +${G.pendingRP()} Research Points?\n\nThis resets your hardware, upgrades, and money. Research is permanent.`)) return;
     const gained = G.prestige();
     UI.shopSig = ''; UI.projSig = '';
+    UI.applyTheme(); // prestige resets the active project, and with it the look
     UI.renderShop(true); UI.renderProjects();
     UI.logOk(`PAPER PUBLISHED! +${gained} RP. The hardware is gone. The knowledge is forever.`);
   });

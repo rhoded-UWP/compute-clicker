@@ -1,4 +1,4 @@
-# Compute Clicker
+# Scale or Die AI
 
 https://compute-clicker.onrender.com/
 

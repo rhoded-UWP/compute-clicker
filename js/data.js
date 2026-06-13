@@ -1,6 +1,6 @@
 'use strict';
 /* ============================================================
-   COMPUTE-CLICKER — game data
+   SCALE OR DIE AI — game data
    All numbers come from economy.md. Edit balance here, not in
    engine.js. Byte values are plain numbers (1 GB = 1e9).
    ============================================================ */
@@ -29,7 +29,7 @@ DATA.producers = [
 
   { id:'ram', glyph:'▤', name:'RAM STICK', vocab:'RAM — working memory',
     desc:'Each stick <span class="fx">DOUBLES</span> the last: 4 MB, 8 MB, 16 MB… exponential growth, live.',
-    baseCost:250, growth:2.3, capRam:4e6 },
+    baseCost:125, growth:2.3, capRam:4e6 },
 
   { id:'ssd', glyph:'▣', name:'STORAGE DRIVE', vocab:'storage — persistent data',
     desc:'Each drive <span class="fx">DOUBLES</span> the last: 50 MB, 100 MB, 200 MB…',
@@ -184,12 +184,14 @@ DATA.upgrades = [
    PROJECTS — the active project multiplies all code value, but
    runs at the bottleneck efficiency:
    eff = min(1, have/need) across storage, RAM, compute, GPUs, VRAM
+   Optional theme:'name' reskins the whole terminal while the
+   project is active (see css/themes.css). No theme = amber CRT.
    ------------------------------------------------------------ */
 DATA.projects = [
   { id:'hello',      name:'HELLO WORLD',          value:1,
     req:{ stor:1e3, ram:1e6, compute:1 }, reveal:0,
     flavor:'Mostly semicolons and optimism.' },
-  { id:'website',    name:'PERSONAL WEBSITE',     value:4,
+  { id:'website',    name:'PERSONAL WEBSITE',     value:4,  theme:'myspace',
     req:{ stor:10e6, ram:64e6, compute:10 }, reveal:100,
     flavor:'Under construction GIF sold separately.' },
   { id:'app',        name:'MOBILE APP',           value:15,
@@ -280,7 +282,7 @@ DATA.scales = [
    FLAVOR TEXT
    ------------------------------------------------------------ */
 DATA.bootLines = [
-  'COMPUTE-CLICKER BIOS v2.0 — CS-101 EDITION',
+  'SCALE OR DIE AI BIOS v2.0 — CS-101 EDITION',
   'COPYRIGHT 1987-2026 OPERATOR COLLECTIVE',
   '',
   'MEM CHECK ............................ <b>640K OK (SHOULD BE ENOUGH FOR ANYONE)</b>',
