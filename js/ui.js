@@ -383,7 +383,8 @@ UI.floatNum = function (text, clientX, clientY) {
 };
 
 UI.typeSnippet = function () {
-  const s = DATA.codeSnippets[Math.floor(Math.random() * DATA.codeSnippets.length)];
+  const pool = DATA.codeSnippetsByTheme[document.body.dataset.theme] || DATA.codeSnippets;
+  const s = pool[Math.floor(Math.random() * pool.length)];
   UI.els.codeStream.textContent = '> ' + s;
 };
 

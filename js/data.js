@@ -309,6 +309,34 @@ DATA.chatter = [
   'SOMEWHERE, A FAN SPINS FASTER.',
 ];
 
+/* shown instead of codeSnippets while a theme is active —
+   the myspace pool is era HTML/CSS, plus actual lines from
+   this very game's source as easter eggs */
+DATA.codeSnippetsByTheme = {
+  myspace: [
+    '<!DOCTYPE html>',
+    '<marquee>welcome to my page!!</marquee>',
+    '<table border="1" cellpadding="0">',
+    '<img src="under_construction.gif">',
+    '<center>best viewed at 800x600</center>',
+    'font-family: "Comic Sans MS", cursive;',
+    'background: url("stars.gif") repeat;',
+    'a:visited { color: purple; }',
+    '<!-- TODO: add hit counter -->',
+    'z-index: 9999; /* why */',
+    '<br><br><br><br>',
+    'margin: 0 auto;',
+    /* ---- easter eggs: real lines from this game ---- */
+    '<title>SCALE OR DIE AI // OPERATOR TERMINAL</title>',
+    '--phos: #ffb000;',
+    "G.SAVE_KEY = 'compute-clicker-v2';",
+    '<div id="die" role="button" tabindex="0"',
+    'animation: ms-drift 120s linear infinite;',
+    'efficiency = min(1, have/need)',
+    '<small>FROM BASEMENT TO DATA CENTERS</small>',
+  ],
+};
+
 DATA.codeSnippets = [
   'print("hello, world")',
   'for (let i = 0; i < n; i++) {',
