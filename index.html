@@ -57,6 +57,15 @@
     <div id="code-stream" aria-hidden="true">&gt; _</div>
     <div id="die" role="button" tabindex="0" aria-label="Press the dev key: write code manually" title="Write code">
       <svg viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <!-- glossy two-tone shine for the skeuo (iOS-6) theme; hard mid-stop = glass -->
+          <linearGradient id="g-skeuo-key" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0"  stop-color="#7ab8f5"/>
+            <stop offset=".5" stop-color="#4a90d9"/>
+            <stop offset=".5" stop-color="#3273c4"/>
+            <stop offset="1"  stop-color="#2a62a8"/>
+          </linearGradient>
+        </defs>
         <circle class="ring spin"  cx="100" cy="100" r="96" stroke-dasharray="4 7"/>
         <circle class="ring spin2" cx="100" cy="100" r="86" stroke-dasharray="1 5"/>
         <rect id="die-pulse" x="38" y="38" width="124" height="124" rx="16"/>

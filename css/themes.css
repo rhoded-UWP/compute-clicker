@@ -261,3 +261,271 @@ body[data-theme="myspace"] #shop-list { scrollbar-color: #3d5a9e #0a0f24; }
   body[data-theme="myspace"] #event-banner,
   body[data-theme="myspace"] #log .ln:last-child::after { animation: none; }
 }
+
+/* ============================================================
+   THEME: "skeuo" — MOBILE APP, c. 2012
+   iOS-6 skeuomorphism: dark linen, glossy nav bars, segmented
+   controls, grouped-table cells, the dev key as an app icon.
+   Vocabulary bonus: this look is called SKEUOMORPHISM.
+   ============================================================ */
+body[data-theme="skeuo"] {
+  --phos:        #d7dbe2;
+  --phos-bright: #ffffff;
+  --phos-dim:    #9aa3b0;
+  --phos-faint:  #50565f;
+  --bg:          #2b2e34;
+  --bg-panel:    #3a3e46;
+  --bg-raise:    #444952;
+  --ok:          #8fd954;
+  --warn:        #ff5e57;
+  --line:        #22252b;
+  --display: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+  --body: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+
+  cursor: default;
+  /* the linen: diagonal weave over a soft top-lit vignette */
+  background:
+    repeating-linear-gradient(45deg,  rgba(255,255,255,.025) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(-45deg, rgba(0,0,0,.20)        0 1px, transparent 1px 3px),
+    radial-gradient(ellipse 120% 90% at 50% 20%, #3a3e47, #232529 80%);
+  background-attachment: fixed;
+}
+
+/* no scanlines; the linen carries the texture */
+body[data-theme="skeuo"]::before,
+body[data-theme="skeuo"]::after { display: none; }
+
+/* ---------- panels: top-lit glass cards ---------- */
+body[data-theme="skeuo"] .panel {
+  background: linear-gradient(180deg, #454a54, #33373e);
+  border: 1px solid #1c1e23;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .09),
+    0 4px 12px rgba(0, 0, 0, .45);
+}
+body[data-theme="skeuo"] .panel::before { display: none; } /* no screws */
+
+body[data-theme="skeuo"] .panel-label {
+  top: 0; left: 0; right: 0;
+  transform: none;
+  background: linear-gradient(180deg, #6d7587, #4a5163);
+  border: none;
+  border-bottom: 1px solid #23262c;
+  border-radius: 9px 9px 0 0;
+  color: #fff;
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: .06em;
+  padding: 4px 10px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .6); /* engraved, lit from above */
+}
+
+body[data-theme="skeuo"] #sys-scroll { padding-top: 32px; }
+body[data-theme="skeuo"] #shop-panel { padding-top: 30px; }
+body[data-theme="skeuo"] #log-panel  { padding-top: 32px; }
+body[data-theme="skeuo"] #core-panel { padding-top: 24px; }
+
+/* ---------- header ---------- */
+body[data-theme="skeuo"] #brand h1 {
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .6), 0 1px 0 rgba(255, 255, 255, .12);
+}
+body[data-theme="skeuo"] #brand small { letter-spacing: .14em; }
+body[data-theme="skeuo"] .meter .v {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .55);
+}
+body[data-theme="skeuo"] .meter .v.scale { font-size: 13px; padding-top: 3px; }
+body[data-theme="skeuo"] .meter .v .unit { font-size: 11px; font-weight: normal; }
+
+/* ---------- core: the dev key is an app icon now ---------- */
+body[data-theme="skeuo"] #core-panel {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(122, 184, 245, .07), transparent 60%),
+    linear-gradient(180deg, #454a54, #33373e);
+}
+body[data-theme="skeuo"] #code-stream { color: #8fd954; text-shadow: none; font-family: Menlo, Consolas, monospace; }
+
+body[data-theme="skeuo"] .ring       { stroke: #5a6270; opacity: .6; }
+body[data-theme="skeuo"] .ring.spin2 { stroke: #7ab8f5; opacity: .35; }
+body[data-theme="skeuo"] #key-base   { fill: #15171b; stroke: #000; }
+body[data-theme="skeuo"] #key-top    {
+  fill: url(#g-skeuo-key);
+  stroke: #1f4d80;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .5));
+}
+body[data-theme="skeuo"] #die.hot #key-top {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .5)) drop-shadow(0 0 18px rgba(122, 184, 245, .65));
+}
+body[data-theme="skeuo"] #die-label { fill: #fff; font-size: 34px; font-weight: bold; }
+body[data-theme="skeuo"] #die-sub,
+body[data-theme="skeuo"] #die-sub2  { fill: #cfe3f8; }
+body[data-theme="skeuo"] #die-pulse { stroke: #7ab8f5; }
+
+body[data-theme="skeuo"] #click-hint {
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: .14em;
+  color: var(--phos-dim);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+}
+body[data-theme="skeuo"] .float-num {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .7);
+}
+
+/* ---------- mission control: grouped table cells ---------- */
+body[data-theme="skeuo"] .sys-head {
+  font-family: var(--body);
+  font-weight: bold;
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--phos-dim);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+body[data-theme="skeuo"] .proj {
+  background: linear-gradient(180deg, #494e58, #3b3f48);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
+}
+body[data-theme="skeuo"] .proj .proj-name { font-size: 12px; font-weight: bold; }
+body[data-theme="skeuo"] .proj .proj-val  { font-size: 11px; font-weight: bold; }
+body[data-theme="skeuo"] .proj.active {
+  border-color: #4a90d9;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .07),
+    0 0 12px rgba(74, 144, 217, .35);
+}
+body[data-theme="skeuo"] .proj.active .proj-name::before { color: #7ab8f5; }
+
+body[data-theme="skeuo"] .chip       { border-radius: 999px; background: rgba(0, 0, 0, .25); }
+body[data-theme="skeuo"] .chip.met   { border-color: #5d9436; background: rgba(143, 217, 84, .10); }
+body[data-theme="skeuo"] .chip.unmet { border-color: #a4413d; background: rgba(255, 94, 87, .10); }
+
+body[data-theme="skeuo"] .rbar .track {
+  background: #22252a;
+  border-color: #15171b;
+  border-radius: 999px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .6);
+}
+body[data-theme="skeuo"] .rbar .fill       { background: #5a6270; border-radius: 999px; }
+body[data-theme="skeuo"] .rbar.met .fill   { background: linear-gradient(180deg, #a5e36b, #6cba2e); }
+body[data-theme="skeuo"] .rbar.unmet .fill { background: linear-gradient(180deg, #f7a54e, #e2574b); }
+
+body[data-theme="skeuo"] #event-banner {
+  font-family: var(--body);
+  font-weight: bold;
+  font-size: 11.5px;
+  border: 1px solid var(--warn);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 94, 87, .16), rgba(255, 94, 87, .06));
+  animation: breathe 2.8s ease-in-out infinite; /* soft pulse, never a hard blink */
+}
+body[data-theme="skeuo"] #event-banner.good {
+  background: linear-gradient(180deg, rgba(143, 217, 84, .14), rgba(143, 217, 84, .05));
+}
+
+/* ---------- log: the Xcode console ---------- */
+body[data-theme="skeuo"] #log { font-size: 11px; font-family: Menlo, Consolas, monospace; }
+body[data-theme="skeuo"] #log .ln:last-child::after {
+  color: #7ab8f5;
+  animation: breathe 2s ease-in-out infinite;
+}
+
+/* ---------- shop: segmented control + grouped cells ---------- */
+body[data-theme="skeuo"] #shop-tabs { border-bottom: none; }
+body[data-theme="skeuo"] #shop-tabs button {
+  font-family: var(--body);
+  font-weight: bold;
+  font-size: 11px;
+  padding: 8px 0;
+  background: linear-gradient(180deg, #5a6170, #3f4550);
+  border: 1px solid #23262c;
+  border-left: none;
+  border-radius: 0;
+  color: #cdd3dc;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+}
+body[data-theme="skeuo"] #shop-tabs button:first-child { border-left: 1px solid #23262c; border-radius: 7px 0 0 7px; }
+body[data-theme="skeuo"] #shop-tabs button:last-child  { border-radius: 0 7px 7px 0; }
+body[data-theme="skeuo"] #shop-tabs button.active {
+  background: linear-gradient(180deg, #6fb3f2, #3577c2);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .45);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .35);
+}
+
+body[data-theme="skeuo"] .item {
+  background: linear-gradient(180deg, #494e58, #3b3f48);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
+}
+body[data-theme="skeuo"] .item:hover:not(:disabled) { border-color: #5a6270; }
+body[data-theme="skeuo"] .item.afford { border-color: #5d9436; }
+body[data-theme="skeuo"] .item.afford:hover {
+  background: linear-gradient(180deg, #4f5a4a, #3d4639);
+  border-color: #6cba2e;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 0 12px rgba(143, 217, 84, .2);
+}
+body[data-theme="skeuo"] .item.bought-flash { animation: sk-buyflash .35s; }
+@keyframes sk-buyflash { 0% { background: #41522f; border-color: #8fd954; } }
+
+body[data-theme="skeuo"] .item .glyph {
+  background: linear-gradient(180deg, #5b96d6, #33639e);
+  border-color: #1f4d80;
+  border-radius: 10px; /* a tiny app icon */
+  color: #fff;
+  font-size: 18px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25);
+}
+body[data-theme="skeuo"] .item .name { font-size: 12px; font-weight: bold; color: #fff; }
+body[data-theme="skeuo"] .item .desc { font-size: 10.5px; }
+body[data-theme="skeuo"] .item .cost { font-size: 12px; font-weight: bold; }
+
+body[data-theme="skeuo"] #prestige-box {
+  border: 1px solid #23262c;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #404550, #34383f);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
+}
+body[data-theme="skeuo"] #prestige-box .ttl { font-size: 13px; font-weight: bold; color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.5); }
+body[data-theme="skeuo"] #prestige-box button {
+  font-family: var(--body);
+  font-weight: bold;
+  font-size: 12px;
+  background: linear-gradient(180deg, #74b6f7, #3879c4);
+  border: 1px solid #2b5e9e;
+  border-radius: 999px;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
+}
+body[data-theme="skeuo"] #prestige-box button:hover:not(:disabled) {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 0 12px rgba(116, 182, 247, .4);
+}
+body[data-theme="skeuo"] #prestige-box button:active:not(:disabled) {
+  background: linear-gradient(180deg, #3879c4, #74b6f7);
+}
+
+body[data-theme="skeuo"] #shop-footer { border-top: 1px solid rgba(255, 255, 255, .08); }
+
+body[data-theme="skeuo"] #sys-scroll,
+body[data-theme="skeuo"] #shop-list { scrollbar-color: #5a6270 #2b2e34; }
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-theme="skeuo"] #event-banner,
+  body[data-theme="skeuo"] #log .ln:last-child::after { animation: none; }
+}
