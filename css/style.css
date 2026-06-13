@@ -360,8 +360,13 @@ header {
   border-bottom: 1px dashed var(--line);
   margin: 14px 0 8px;
   padding-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
 }
 .sys-head:first-child { margin-top: 0; }
+.sys-head .tgt { color: var(--phos-bright); letter-spacing: .12em; white-space: nowrap; }
 
 /* project rows */
 .proj {

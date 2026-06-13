@@ -17,7 +17,7 @@ UI.init = function () {
   UI.els = {
     money: $('m-money'), income: $('m-income'), code: $('m-code'), scale: $('m-scale'),
     clickVal: $('click-val'), codeStream: $('code-stream'),
-    projects: $('project-list'), resBars: $('res-bars'), facility: $('facility-stats'),
+    projects: $('project-list'), resBars: $('res-bars'), resTarget: $('res-target'), facility: $('facility-stats'),
     eventBanner: $('event-banner'),
     shopList: $('shop-list'), log: $('log'),
     die: $('die'), corePanel: $('core-panel'),
@@ -149,26 +149,49 @@ UI.reqChips = function (p) {
   return { html, allMet };
 };
 
-UI.BAR_DEFS = [
-  { key: 'STORAGE', have: st => st.storCap,  need: st => st.proj.req.stor, fmt: G => G.fmtBytes },
-  { key: 'RAM',     have: st => st.ramCap,   need: st => st.proj.req.ram || 0, fmt: G => G.fmtBytes },
-  { key: 'COMPUTE', have: st => st.compute,  need: st => st.proj.req.compute, fmt: G => G.fmtNum },
-  { key: 'VRAM',    have: st => st.vramCap,  need: st => st.proj.req.vram || 0, fmt: G => G.fmtBytes },
-];
+/* Aspirational target: the next rung on the project ladder you
+   haven't reached yet — the first REVEALED project whose
+   requirements aren't all met. Independent of which project is
+   active; this is "what to build toward next". Only ever returns
+   a revealed project, so the bracket label is never CLASSIFIED. */
+UI.aspirationTarget = function () {
+  const st = G.stats;
+  const dsMult = Math.pow(0.85, G.state.research.datastruct || 0);
+  const met = p => {
+    const r = p.req;
+    if (st.storCap < r.stor) return false;
+    if (st.ramCap  < (r.ram || 0) * dsMult) return false;
+    if (st.compute < r.compute) return false;
+    if (r.gpus && st.gpus    < r.gpus) return false;
+    if (r.vram && st.vramCap < r.vram) return false;
+    return true;
+  };
+  const revealed = DATA.projects.filter(p => G.state.runLifetime >= p.reveal);
+  for (const p of revealed) if (!met(p)) return p;        // first goal not yet reached
+  return revealed[revealed.length - 1] || DATA.projects[0]; // all met → aim at the top rung
+};
 
 UI.renderResources = function () {
   const st = G.stats;
+  const target = UI.aspirationTarget();
+  const req = target.req;
   const dsMult = Math.pow(0.85, G.state.research.datastruct || 0);
+  if (UI.els.resTarget) UI.els.resTarget.textContent = '[' + target.name + ']';
+
+  const rows = [
+    { key: 'STORAGE', have: st.storCap, need: req.stor,                fmt: G.fmtBytes },
+    { key: 'RAM',     have: st.ramCap,  need: (req.ram || 0) * dsMult, fmt: G.fmtBytes },
+    { key: 'COMPUTE', have: st.compute, need: req.compute,             fmt: G.fmtNum },
+    { key: 'VRAM',    have: st.vramCap, need: req.vram || 0,           fmt: G.fmtBytes },
+    { key: 'GPUS',    have: st.gpus,    need: req.gpus || 0,           fmt: G.fmtNum },
+  ];
   let html = '';
-  for (const def of UI.BAR_DEFS) {
-    let need = def.need(st);
-    if (def.key === 'RAM') need *= dsMult;
-    if (!need && def.key === 'VRAM' && st.vramCap === 0) continue;
-    const have = def.have(st);
-    const ratio = need > 0 ? Math.min(1, have / need) : 1;
-    const fmt = def.fmt(G);
+  for (const r of rows) {
+    // show a bar if the goal needs it, or (for VRAM/GPUs) if you already own some
+    if (!r.need && !((r.key === 'VRAM' || r.key === 'GPUS') && r.have > 0)) continue;
+    const ratio = r.need > 0 ? Math.min(1, r.have / r.need) : 1;
     html += `<div class="rbar ${ratio >= 1 ? 'met' : 'unmet'}">
-      <div class="rrow"><span>${def.key}</span><b>${fmt(have)}${need ? ' / ' + fmt(need) : ''}</b></div>
+      <div class="rrow"><span>${r.key}</span><b>${r.fmt(r.have)}${r.need ? ' / ' + r.fmt(r.need) : ''}</b></div>
       <div class="track"><div class="fill" style="width:${(ratio * 100).toFixed(1)}%"></div></div>
     </div>`;
   }
