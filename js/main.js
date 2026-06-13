@@ -12,7 +12,13 @@
   /* ------------------- the dev key ------------------- */
   const die = UI.els.die;
 
+  const PRESS_COOLDOWN_MS = 80; // caps mash/autorepeat at ~12 presses/sec
+  let lastPress = 0;
+
   function press(clientX, clientY) {
+    const now = performance.now();
+    if (now - lastPress < PRESS_COOLDOWN_MS) return;
+    lastPress = now;
     const gain = G.click();
     die.classList.remove('pulse'); void die.offsetWidth; die.classList.add('pulse');
     die.classList.add('hot');
@@ -29,6 +35,7 @@
   die.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      if (e.repeat) return; // holding the key down is not typing
       die.classList.add('pressed');
       press();
     }
