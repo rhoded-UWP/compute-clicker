@@ -30,6 +30,8 @@ UI.init = function () {
 /* The active project may carry theme:'name' (data.js); we set
    <body data-theme> and css/themes.css does the rest. Swap is
    a slow cross-fade via #app opacity — never a hard flash. */
+UI.DIE_LABELS = { myspace: '< >' }; // per-theme dev-key glyph; default is { }
+
 UI.applyTheme = function () {
   const proj = DATA.projects.find(p => p.id === G.state.activeProject);
   const theme = (proj && proj.theme) || '';
@@ -38,6 +40,7 @@ UI.applyTheme = function () {
   const set = () => {
     if (theme) document.body.dataset.theme = theme;
     else delete document.body.dataset.theme;
+    $('die-label').textContent = UI.DIE_LABELS[theme] || '{ }';
   };
   if (!app.classList.contains('on')) { set(); return; } // pre-boot: no fade needed
   app.classList.add('theme-swap');
